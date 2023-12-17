@@ -24,33 +24,36 @@ size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
 
 GpioButtonMapping button_mappings[] = {
-    {&InputState::l,            5 },
+    {&InputState::l,            17 },
     { &InputState::left,        4 },
-    { &InputState::down,        3 },
-    { &InputState::right,       2 },
+    { &InputState::down,        8 },
+    { &InputState::right,       7 },
 
-    { &InputState::mod_x,       6 },
-    { &InputState::mod_y,       7 },
+    { &InputState::mod_x,       11 },
+    { &InputState::mod_x_2,     5 },
+    { &InputState::mod_y,       9 },
+    { &InputState::mod_y_2,     16 },
 
-    { &InputState::select,      10},
-    { &InputState::start,       0 },
-    { &InputState::home,        11},
+    { &InputState::select,      27},
+    { &InputState::start,       22 },
+    { &InputState::home,        26},
 
-    { &InputState::c_left,      13},
-    { &InputState::c_up,        12},
+    { &InputState::c_left,      14},
+    { &InputState::c_up,        13},
     { &InputState::c_down,      15},
-    { &InputState::a,           14},
-    { &InputState::c_right,     16},
+    { &InputState::a,           12},
+    { &InputState::c_right,     6},
 
-    { &InputState::b,           26},
-    { &InputState::x,           21},
-    { &InputState::z,           19},
-    { &InputState::up,          17},
+    { &InputState::b,           10},
+    { &InputState::x,           18},
+    { &InputState::z,           21},
+    { &InputState::up,          0},
+    { &InputState::up_2,        3},
 
-    { &InputState::r,           27},
-    { &InputState::y,           22},
-    { &InputState::lightshield, 20},
-    { &InputState::midshield,   18},
+    { &InputState::r,           20},
+    { &InputState::y,           1},
+    { &InputState::lightshield, 19},
+    { &InputState::midshield,   2},
 };
 size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
@@ -128,10 +131,8 @@ void setup() {
         backends = new CommunicationBackend *[backend_count] { primary_backend };
     }
 
-    // Default to Melee mode.
-    primary_backend->SetGameMode(
-        new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
-    );
+    // Default to Ultimate mode.
+    primary_backend->SetGameMode(new Ultimate(socd::SOCD_2IP));
 }
 
 void loop() {

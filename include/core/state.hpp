@@ -10,6 +10,7 @@ typedef struct inputstate {
     bool right = false;
     bool down = false;
     bool up = false;
+    bool up_2 = false;
     bool c_left = false;
     bool c_right = false;
     bool c_down = false;
@@ -27,7 +28,9 @@ typedef struct inputstate {
     bool start = false;
     bool home = false;
     bool mod_x = false;
+    bool mod_x_2 = false;
     bool mod_y = false;
+    bool mod_y_2 = false;
 
     // Nunchuk inputs.
     bool nunchuk_connected = false;
