@@ -91,17 +91,7 @@ void setup() {
     /* Select communication backend. */
     CommunicationBackend *primary_backend;
     if (console == ConnectedConsole::NONE) {
-        if (button_holds.x) {
-            // If no console detected and X is held on plugin then use Switch USB backend.
-            NintendoSwitchBackend::RegisterDescriptor();
-            backend_count = 1;
-            primary_backend = new NintendoSwitchBackend(input_sources, input_source_count);
-            backends = new CommunicationBackend *[backend_count] { primary_backend };
-
-            // Default to Ultimate mode on Switch.
-            primary_backend->SetGameMode(new Ultimate(socd::SOCD_2IP));
-            return;
-        } else if (button_holds.z) {
+        if (button_holds.z) {
             // If no console detected and Z is held on plugin then use DInput backend.
             TUGamepad::registerDescriptor();
             TUKeyboard::registerDescriptor();
@@ -111,12 +101,11 @@ void setup() {
                 primary_backend, new B0XXInputViewer(input_sources, input_source_count)
             };
         } else {
-            // Default to XInput mode if no console detected and no other mode forced.
-            backend_count = 2;
-            primary_backend = new XInputBackend(input_sources, input_source_count);
-            backends = new CommunicationBackend *[backend_count] {
-                primary_backend, new B0XXInputViewer(input_sources, input_source_count)
-            };
+            // If no console detected then use Switch USB backend.
+            NintendoSwitchBackend::RegisterDescriptor();
+            backend_count = 1;
+            primary_backend = new NintendoSwitchBackend(input_sources, input_source_count);
+            backends = new CommunicationBackend *[backend_count] { primary_backend };
         }
     } else {
         if (console == ConnectedConsole::GAMECUBE) {
