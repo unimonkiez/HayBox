@@ -7,7 +7,8 @@
 #include "modes/Melee20Button.hpp"
 #include "modes/ProjectM.hpp"
 #include "modes/RivalsOfAether.hpp"
-#include "modes/Ultimate.hpp"
+#include "modes/UltimateGcc.hpp"
+#include "modes/UltimateSwitch.hpp"
 
 extern KeyboardMode *current_kb_mode;
 
@@ -47,7 +48,7 @@ void select_mode(CommunicationBackend *backend) {
                 )
             );
         } else if (inputs.down) {
-            set_mode(backend, new UltimateGCC(socd::SOCD_2IP));
+            set_mode(backend, new UltimateSwitch(socd::SOCD_2IP));
         } else if (inputs.right) {
             set_mode(backend, new FgcMode(socd::SOCD_NEUTRAL, socd::SOCD_NEUTRAL));
         } else if (inputs.b) {

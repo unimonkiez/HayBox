@@ -124,7 +124,7 @@ void setup() {
     }
 
     // Default to Ultimate mode.
-    primary_backend->SetGameMode(new UltimateGCC(socd::SOCD_2IP));
+    primary_backend->SetGameMode(new UltimateGcc(socd::SOCD_2IP));
 }
 
 void loop() {
