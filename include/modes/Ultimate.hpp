@@ -5,9 +5,18 @@
 #include "core/socd.hpp"
 #include "core/state.hpp"
 
-class Ultimate : public ControllerMode {
+class UltimateGCC : public ControllerMode {
   public:
-    Ultimate(socd::SocdType socd_type);
+    UltimateGCC(socd::SocdType socd_type);
+
+  private:
+    void UpdateDigitalOutputs(InputState &inputs, OutputState &outputs);
+    void UpdateAnalogOutputs(InputState &inputs, OutputState &outputs);
+};
+
+class UltimateSwitch : public ControllerMode {
+  public:
+    UltimateSwitch(socd::SocdType socd_type);
 
   private:
     void UpdateDigitalOutputs(InputState &inputs, OutputState &outputs);

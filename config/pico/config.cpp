@@ -36,7 +36,7 @@ GpioButtonMapping button_mappings[] = {
 
     { &InputState::select,      27},
     { &InputState::start,       22 },
-    { &InputState::home,        26},
+    { &InputState::home,        2},
 
     { &InputState::c_left,      14},
     { &InputState::c_up,        13},
@@ -53,7 +53,7 @@ GpioButtonMapping button_mappings[] = {
     { &InputState::r,           20},
     { &InputState::y,           1},
     { &InputState::lightshield, 19},
-    { &InputState::midshield,   2},
+    { &InputState::midshield,   26},
 };
 size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
@@ -106,6 +106,9 @@ void setup() {
             backend_count = 1;
             primary_backend = new NintendoSwitchBackend(input_sources, input_source_count);
             backends = new CommunicationBackend *[backend_count] { primary_backend };
+            // Default to Ultimate mode.
+            primary_backend->SetGameMode(new UltimateSwitch(socd::SOCD_2IP));
+            return;
         }
     } else {
         if (console == ConnectedConsole::GAMECUBE) {
@@ -121,7 +124,7 @@ void setup() {
     }
 
     // Default to Ultimate mode.
-    primary_backend->SetGameMode(new Ultimate(socd::SOCD_2IP));
+    primary_backend->SetGameMode(new UltimateGCC(socd::SOCD_2IP));
 }
 
 void loop() {
